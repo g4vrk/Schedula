@@ -28,9 +28,12 @@ tasks {
 
 publishing {
     publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
+        create<MavenPublication>("shadow") {
+            artifact(tasks.shadowJar)
+
+            groupId = "com.g4vrk"
             artifactId = "schedula-multi"
+            version = project.version.toString()
         }
     }
 }
