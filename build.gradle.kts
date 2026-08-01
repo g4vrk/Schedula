@@ -12,6 +12,10 @@ allprojects {
 
 subprojects {
     apply(plugin = "java-library")
+    apply(plugin = "maven-publish")
+
+    group = rootProject.group
+    version = rootProject.version
 
     java {
         toolchain.languageVersion = JavaLanguageVersion.of(17)
