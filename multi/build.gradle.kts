@@ -1,3 +1,7 @@
+plugins {
+    id("com.gradleup.shadow") version "9.0.0"
+}
+
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(21)
 }
@@ -10,6 +14,16 @@ dependencies {
 
     compileOnly("io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT")
 
+}
+
+tasks {
+    shadowJar {
+        archiveClassifier.set("")
+    }
+
+    build {
+        dependsOn(shadowJar)
+    }
 }
 
 publishing {
