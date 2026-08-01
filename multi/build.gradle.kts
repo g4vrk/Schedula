@@ -4,9 +4,9 @@ java {
 
 dependencies {
 
-    implementation(project(":common")) {
-        exclude(group = "io.papermc.paper", module = "paper-api")
-    }
+    implementation(project(":common"))
+    implementation(project(":folia"))
+    implementation(project(":bukkit"))
 
     compileOnly("io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT")
 

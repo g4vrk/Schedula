@@ -2,19 +2,19 @@ package com.g4vrk.schedula.bukkit.impl.task.runner;
 
 import com.g4vrk.schedula.bukkit.impl.task.PaperTask;
 import com.g4vrk.schedula.task.Task;
-import com.g4vrk.schedula.task.runner.AbstractTaskRunner;
-import com.g4vrk.schedula.task.schedule.TickSchedule;
+import com.g4vrk.schedula.task.scheduler.AbstractScheduler;
+import com.g4vrk.schedula.task.TickSchedule;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.jetbrains.annotations.NotNull;
 
-public class PaperTaskRunner extends AbstractTaskRunner {
+public class PaperScheduler extends AbstractScheduler {
 
     private final BukkitScheduler scheduler;
 
-    public PaperTaskRunner(@NotNull Plugin plugin) {
+    public PaperScheduler(@NotNull Plugin plugin) {
         super(plugin);
         this.scheduler = plugin.getServer().getScheduler();
     }
@@ -98,17 +98,6 @@ public class PaperTaskRunner extends AbstractTaskRunner {
                 runnable,
                 tickSchedule,
                 true
-        );
-    }
-
-    @Override
-    public @NotNull Task runGlobally(
-            @NotNull Runnable runnable,
-            @NotNull TickSchedule tickSchedule
-    ) {
-        return schedule(
-                runnable,
-                tickSchedule
         );
     }
 

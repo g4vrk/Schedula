@@ -1,12 +1,12 @@
-package com.g4vrk.schedula.task.runner;
+package com.g4vrk.schedula.task.scheduler;
 
 import com.g4vrk.schedula.task.Task;
-import com.g4vrk.schedula.task.schedule.TickSchedule;
+import com.g4vrk.schedula.task.TickSchedule;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.jetbrains.annotations.NotNull;
 
-public interface TaskRunner {
+public interface Scheduler {
 
     @NotNull Task schedule(
             @NotNull Runnable runnable,

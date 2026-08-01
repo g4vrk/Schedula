@@ -1,4 +1,4 @@
-package com.g4vrk.schedula.task.schedule;
+package com.g4vrk.schedula.task;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

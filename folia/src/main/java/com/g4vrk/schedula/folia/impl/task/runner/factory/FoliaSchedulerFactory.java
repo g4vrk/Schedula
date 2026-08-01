@@ -1,19 +1,19 @@
 package com.g4vrk.schedula.folia.impl.task.runner.factory;
 
-import com.g4vrk.schedula.folia.impl.task.runner.FoliaTaskRunner;
-import com.g4vrk.schedula.task.runner.factory.AbstractTaskRunnerFactory;
+import com.g4vrk.schedula.folia.impl.task.runner.FoliaScheduler;
+import com.g4vrk.schedula.task.scheduler.factory.AbstractSchedulerFactory;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
-public class FoliaTaskRunnerFactory extends AbstractTaskRunnerFactory<FoliaTaskRunner> {
+public class FoliaSchedulerFactory extends AbstractSchedulerFactory<FoliaScheduler> {
 
-    public FoliaTaskRunnerFactory(@NotNull Plugin plugin) {
+    public FoliaSchedulerFactory(@NotNull Plugin plugin) {
         super(plugin);
     }
 
     @Override
-    public @NotNull FoliaTaskRunner create() {
-        return new FoliaTaskRunner(getPlugin());
+    public @NotNull FoliaScheduler create() {
+        return new FoliaScheduler(getPlugin());
     }
 
 }

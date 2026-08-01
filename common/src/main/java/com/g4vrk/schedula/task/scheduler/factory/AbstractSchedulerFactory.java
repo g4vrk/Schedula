@@ -1,17 +1,17 @@
-package com.g4vrk.schedula.task.runner.factory;
+package com.g4vrk.schedula.task.scheduler.factory;
 
-import com.g4vrk.schedula.task.runner.TaskRunner;
+import com.g4vrk.schedula.task.scheduler.Scheduler;
 import lombok.AccessLevel;
 import lombok.Getter;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class AbstractTaskRunnerFactory<R extends TaskRunner> implements TaskRunnerFactory {
+public abstract class AbstractSchedulerFactory<R extends Scheduler> implements SchedulerFactory {
 
     @Getter(AccessLevel.PROTECTED)
     private final Plugin plugin;
 
-    protected AbstractTaskRunnerFactory(
+    protected AbstractSchedulerFactory(
             @NotNull Plugin plugin
     ) {
         this.plugin = plugin;

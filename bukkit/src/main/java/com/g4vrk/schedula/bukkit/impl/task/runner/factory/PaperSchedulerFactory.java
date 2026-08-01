@@ -1,19 +1,19 @@
 package com.g4vrk.schedula.bukkit.impl.task.runner.factory;
 
-import com.g4vrk.schedula.bukkit.impl.task.runner.PaperTaskRunner;
-import com.g4vrk.schedula.task.runner.factory.AbstractTaskRunnerFactory;
+import com.g4vrk.schedula.bukkit.impl.task.runner.PaperScheduler;
+import com.g4vrk.schedula.task.scheduler.factory.AbstractSchedulerFactory;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
-public class PaperTaskRunnerFactory extends AbstractTaskRunnerFactory<PaperTaskRunner> {
+public class PaperSchedulerFactory extends AbstractSchedulerFactory<PaperScheduler> {
 
-    public PaperTaskRunnerFactory(@NotNull Plugin plugin) {
+    public PaperSchedulerFactory(@NotNull Plugin plugin) {
         super(plugin);
     }
 
     @Override
-    public @NotNull PaperTaskRunner create() {
-        return new PaperTaskRunner(getPlugin());
+    public @NotNull PaperScheduler create() {
+        return new PaperScheduler(getPlugin());
     }
 
 }

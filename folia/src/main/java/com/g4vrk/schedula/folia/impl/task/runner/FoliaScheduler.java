@@ -3,8 +3,8 @@ package com.g4vrk.schedula.folia.impl.task.runner;
 import com.g4vrk.schedula.folia.impl.task.FoliaTask;
 import com.g4vrk.schedula.task.DummyTask;
 import com.g4vrk.schedula.task.Task;
-import com.g4vrk.schedula.task.runner.AbstractTaskRunner;
-import com.g4vrk.schedula.task.schedule.TickSchedule;
+import com.g4vrk.schedula.task.scheduler.AbstractScheduler;
+import com.g4vrk.schedula.task.TickSchedule;
 import io.papermc.paper.threadedregions.scheduler.AsyncScheduler;
 import io.papermc.paper.threadedregions.scheduler.GlobalRegionScheduler;
 import io.papermc.paper.threadedregions.scheduler.RegionScheduler;
@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.TimeUnit;
 
-public final class FoliaTaskRunner extends AbstractTaskRunner {
+public final class FoliaScheduler extends AbstractScheduler {
 
     private final GlobalRegionScheduler globalRegionScheduler;
 
@@ -24,7 +24,7 @@ public final class FoliaTaskRunner extends AbstractTaskRunner {
 
     private final AsyncScheduler asyncScheduler;
 
-    public FoliaTaskRunner(
+    public FoliaScheduler(
             @NotNull Plugin plugin
     ) {
         super(plugin);
@@ -83,7 +83,6 @@ public final class FoliaTaskRunner extends AbstractTaskRunner {
         return adapt(task, false);
     }
 
-    @Override
     public @NotNull Task runGlobally(
             @NotNull Runnable runnable,
             @NotNull TickSchedule tickSchedule
