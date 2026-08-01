@@ -7,8 +7,6 @@ import com.g4vrk.schedula.task.scheduler.factory.SchedulerFactory;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
-import static com.g4vrk.schedula.multi.FoliaUtility.foliaServer;
-
 class BuilderImpl implements MultiplatformSchedulaAPI.Builder {
 
     private SchedulerFactory schedulerFactory;
@@ -18,7 +16,7 @@ class BuilderImpl implements MultiplatformSchedulaAPI.Builder {
 
     @Override
     public MultiplatformSchedulaAPI.@NotNull Builder autoDetectFactoryFor(@NotNull Plugin plugin) {
-        this.schedulerFactory = foliaServer()
+        this.schedulerFactory = FoliaUtility.foliaServer()
                 ? new FoliaSchedulerFactory(plugin)
                 : new PaperSchedulerFactory(plugin);
 
