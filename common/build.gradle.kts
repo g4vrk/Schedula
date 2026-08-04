@@ -8,7 +8,10 @@ publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
+
+            groupId = "com.g4vrk"
             artifactId = "schedula-common"
+            version = project.version.toString()
         }
     }
 }

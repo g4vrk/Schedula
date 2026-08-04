@@ -1,5 +1,5 @@
 plugins {
-    id("com.gradleup.shadow") version "9.0.0"
+    id("com.gradleup.shadow") version "9.6.1"
 }
 
 java {
@@ -17,7 +17,15 @@ dependencies {
 }
 
 tasks {
+    jar {
+        enabled = false
+    }
+
     shadowJar {
+        dependsOn(
+            project(":bukkit").tasks.named("shadowJar"),
+            project(":folia").tasks.named("shadowJar")
+        )
         archiveClassifier.set("")
     }
 
