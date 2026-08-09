@@ -16,6 +16,7 @@ tasks {
     }
 
     shadowJar {
+        archiveBaseName.set("schedula-bukkit")
         archiveClassifier.set("")
     }
 

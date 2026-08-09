@@ -26,6 +26,7 @@ tasks {
             project(":bukkit").tasks.named("shadowJar"),
             project(":folia").tasks.named("shadowJar")
         )
+        archiveBaseName.set("schedula-multi")
         archiveClassifier.set("")
     }
 

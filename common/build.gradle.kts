@@ -4,6 +4,12 @@ dependencies {
 
 }
 
+tasks {
+    jar {
+        archiveBaseName.set("schedula-common")
+    }
+}
+
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {

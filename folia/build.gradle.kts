@@ -22,6 +22,7 @@ tasks {
     }
 
     shadowJar {
+        archiveBaseName.set("schedula-folia")
         archiveClassifier.set("")
     }
 
