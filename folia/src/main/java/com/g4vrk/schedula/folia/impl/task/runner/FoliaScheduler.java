@@ -3,8 +3,8 @@ package com.g4vrk.schedula.folia.impl.task.runner;
 import com.g4vrk.schedula.folia.impl.task.FoliaTask;
 import com.g4vrk.schedula.task.DummyTask;
 import com.g4vrk.schedula.task.Task;
-import com.g4vrk.schedula.task.scheduler.AbstractScheduler;
 import com.g4vrk.schedula.task.TickSchedule;
+import com.g4vrk.schedula.task.scheduler.AbstractScheduler;
 import io.papermc.paper.threadedregions.scheduler.AsyncScheduler;
 import io.papermc.paper.threadedregions.scheduler.GlobalRegionScheduler;
 import io.papermc.paper.threadedregions.scheduler.RegionScheduler;
@@ -15,6 +15,7 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 public final class FoliaScheduler extends AbstractScheduler {
 
@@ -41,6 +42,17 @@ public final class FoliaScheduler extends AbstractScheduler {
     ) {
         return runGlobally(
                 runnable,
+                tickSchedule
+        );
+    }
+
+    @Override
+    public @NotNull Task schedule(
+            @NotNull Consumer<Task> consumer,
+            @NotNull TickSchedule tickSchedule
+    ) {
+        return runGlobally(
+                consumer,
                 tickSchedule
         );
     }
@@ -83,6 +95,49 @@ public final class FoliaScheduler extends AbstractScheduler {
         return adapt(task, false);
     }
 
+    @Override
+    public @NotNull Task scheduleAsync(
+            @NotNull Consumer<Task> consumer,
+            @NotNull TickSchedule tickSchedule
+    ) {
+        final ScheduledTask task;
+
+        if (tickSchedule.isRepeating()) {
+
+            task = asyncScheduler.runAtFixedRate(
+                    getPlugin(),
+                    scheduledTask -> consumer.accept(
+                            adapt(scheduledTask, false)
+                    ),
+                    positiveMillis(tickSchedule.getDelay()),
+                    positiveMillis(tickSchedule.getPeriod()),
+                    TimeUnit.MILLISECONDS
+            );
+
+        } else if (tickSchedule.isDelayed()) {
+
+            task = asyncScheduler.runDelayed(
+                    getPlugin(),
+                    scheduledTask -> consumer.accept(
+                            adapt(scheduledTask, false)
+                    ),
+                    positiveMillis(tickSchedule.getDelay()),
+                    TimeUnit.MILLISECONDS
+            );
+
+        } else {
+
+            task = asyncScheduler.runNow(
+                    getPlugin(),
+                    scheduledTask -> consumer.accept(
+                            adapt(scheduledTask, false)
+                    )
+            );
+        }
+
+        return adapt(task, false);
+    }
+
     public @NotNull Task runGlobally(
             @NotNull Runnable runnable,
             @NotNull TickSchedule tickSchedule
@@ -112,6 +167,46 @@ public final class FoliaScheduler extends AbstractScheduler {
             task = globalRegionScheduler.run(
                     getPlugin(),
                     scheduledTask -> runnable.run()
+            );
+        }
+
+        return adapt(task, true);
+    }
+
+    public @NotNull Task runGlobally(
+            @NotNull Consumer<Task> consumer,
+            @NotNull TickSchedule tickSchedule
+    ) {
+        final ScheduledTask task;
+
+        if (tickSchedule.isRepeating()) {
+
+            task = globalRegionScheduler.runAtFixedRate(
+                    getPlugin(),
+                    scheduledTask -> consumer.accept(
+                            adapt(scheduledTask, true)
+                    ),
+                    positiveTicks(tickSchedule.getDelay()),
+                    positiveTicks(tickSchedule.getPeriod())
+            );
+
+        } else if (tickSchedule.isDelayed()) {
+
+            task = globalRegionScheduler.runDelayed(
+                    getPlugin(),
+                    scheduledTask -> consumer.accept(
+                            adapt(scheduledTask, true)
+                    ),
+                    positiveTicks(tickSchedule.getDelay())
+            );
+
+        } else {
+
+            task = globalRegionScheduler.run(
+                    getPlugin(),
+                    scheduledTask -> consumer.accept(
+                            adapt(scheduledTask, true)
+                    )
             );
         }
 
@@ -163,6 +258,55 @@ public final class FoliaScheduler extends AbstractScheduler {
     }
 
     @Override
+    public @NotNull Task scheduleEntity(
+            @NotNull Entity entity,
+            @NotNull Consumer<Task> consumer,
+            @NotNull TickSchedule tickSchedule
+    ) {
+        final ScheduledTask task;
+
+        if (tickSchedule.isRepeating()) {
+
+            task = entity.getScheduler().runAtFixedRate(
+                    getPlugin(),
+                    scheduledTask -> consumer.accept(
+                            adapt(scheduledTask, false)
+                    ),
+                    null,
+                    positiveTicks(tickSchedule.getDelay()),
+                    positiveTicks(tickSchedule.getPeriod())
+            );
+
+        } else if (tickSchedule.isDelayed()) {
+
+            task = entity.getScheduler().runDelayed(
+                    getPlugin(),
+                    scheduledTask -> consumer.accept(
+                            adapt(scheduledTask, false)
+                    ),
+                    null,
+                    positiveTicks(tickSchedule.getDelay())
+            );
+
+        } else {
+
+            task = entity.getScheduler().run(
+                    getPlugin(),
+                    scheduledTask -> consumer.accept(
+                            adapt(scheduledTask, false)
+                    ),
+                    null
+            );
+        }
+
+        if (task == null) {
+            return DummyTask.get();
+        }
+
+        return adapt(task, false);
+    }
+
+    @Override
     public @NotNull Task scheduleLocation(
             @NotNull Location location,
             @NotNull Runnable runnable,
@@ -196,6 +340,51 @@ public final class FoliaScheduler extends AbstractScheduler {
                     getPlugin(),
                     location,
                     scheduledTask -> runnable.run()
+            );
+        }
+
+        return adapt(task, false);
+    }
+
+    @Override
+    public @NotNull Task scheduleLocation(
+            @NotNull Location location,
+            @NotNull Consumer<Task> consumer,
+            @NotNull TickSchedule tickSchedule
+    ) {
+        final ScheduledTask task;
+
+        if (tickSchedule.isRepeating()) {
+
+            task = regionScheduler.runAtFixedRate(
+                    getPlugin(),
+                    location,
+                    scheduledTask -> consumer.accept(
+                            adapt(scheduledTask, false)
+                    ),
+                    positiveTicks(tickSchedule.getDelay()),
+                    positiveTicks(tickSchedule.getPeriod())
+            );
+
+        } else if (tickSchedule.isDelayed()) {
+
+            task = regionScheduler.runDelayed(
+                    getPlugin(),
+                    location,
+                    scheduledTask -> consumer.accept(
+                            adapt(scheduledTask, false)
+                    ),
+                    positiveTicks(tickSchedule.getDelay())
+            );
+
+        } else {
+
+            task = regionScheduler.run(
+                    getPlugin(),
+                    location,
+                    scheduledTask -> consumer.accept(
+                            adapt(scheduledTask, false)
+                    )
             );
         }
 

@@ -10,6 +10,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.function.Consumer;
+
 public abstract class AbstractScheduler implements Scheduler {
 
     @Getter(AccessLevel.PROTECTED)
@@ -29,12 +31,23 @@ public abstract class AbstractScheduler implements Scheduler {
     public abstract @NotNull Task schedule(@NotNull Runnable runnable, @NotNull TickSchedule tickSchedule);
 
     @Override
+    public abstract @NotNull Task schedule(@NotNull Consumer<Task> consumer, @NotNull TickSchedule tickSchedule);
+
+    @Override
     public abstract @NotNull Task scheduleAsync(@NotNull Runnable runnable, @NotNull TickSchedule tickSchedule);
+
+    @Override
+    public abstract @NotNull Task scheduleAsync(@NotNull Consumer<Task> consumer, @NotNull TickSchedule tickSchedule);
 
     @Override
     public abstract @NotNull Task scheduleEntity(@NotNull Entity entity, @NotNull Runnable runnable, @NotNull TickSchedule tickSchedule);
 
     @Override
+    public abstract @NotNull Task scheduleEntity(@NotNull Entity entity, @NotNull Consumer<Task> consumer, @NotNull TickSchedule tickSchedule);
+
+    @Override
     public abstract @NotNull Task scheduleLocation(@NotNull Location location, @NotNull Runnable runnable, @NotNull TickSchedule tickSchedule);
 
+    @Override
+    public abstract @NotNull Task scheduleLocation(@NotNull Location location, @NotNull Consumer<Task> consumer, @NotNull TickSchedule tickSchedule);
 }
