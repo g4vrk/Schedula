@@ -1,23 +1,5 @@
 dependencies {
 
-    compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
+    compileOnly(libs.paper.api)
 
-}
-
-tasks {
-    jar {
-        archiveBaseName.set("schedula-common")
-    }
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
-
-            groupId = "com.g4vrk"
-            artifactId = "schedula-common"
-            version = project.version.toString()
-        }
-    }
 }

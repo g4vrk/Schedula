@@ -1,4 +1,4 @@
-rootProject.name = "Schedula"
+rootProject.name = "schedula"
 
 include(
     "common",
@@ -6,3 +6,17 @@ include(
     "folia",
     "multi"
 )
+
+dependencyResolutionManagement {
+
+    versionCatalogs {
+
+        create("libs") {
+
+            from(files("libs.versions.toml"))
+
+        }
+
+    }
+
+}
