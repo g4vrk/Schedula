@@ -8,50 +8,65 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public interface Scheduler {
+/**
+ * Schedules tasks using Bukkit entity and location types.
+ */
+public interface Scheduler extends TaskScheduler<Entity> {
 
+    @Override
     @NotNull Task schedule(
-            @NotNull Runnable runnable,
-            @NotNull TickSchedule tickSchedule
+            final @NotNull Runnable runnable,
+            final @NotNull TickSchedule tickSchedule
     );
 
+    @Override
     @NotNull Task schedule(
-            @NotNull Consumer<Task> consumer,
-            @NotNull TickSchedule tickSchedule
+            final @NotNull Consumer<Task> consumer,
+            final @NotNull TickSchedule tickSchedule
     );
 
+    @Override
     @NotNull Task scheduleAsync(
-            @NotNull Runnable runnable,
-            @NotNull TickSchedule tickSchedule
+            final @NotNull Runnable runnable,
+            final @NotNull TickSchedule tickSchedule
     );
 
+    @Override
     @NotNull Task scheduleAsync(
-            @NotNull Consumer<Task> consumer,
-            @NotNull TickSchedule tickSchedule
+            final @NotNull Consumer<Task> consumer,
+            final @NotNull TickSchedule tickSchedule
     );
 
+    @Override
     @NotNull Task scheduleEntity(
-            @NotNull Entity entity,
-            @NotNull Runnable runnable,
-            @NotNull TickSchedule tickSchedule
+            final @NotNull Entity entity,
+            final @NotNull Runnable runnable,
+            final @NotNull TickSchedule tickSchedule
     );
 
+    @Override
     @NotNull Task scheduleEntity(
-            @NotNull Entity entity,
-            @NotNull Consumer<Task> consumer,
-            @NotNull TickSchedule tickSchedule
+            final @NotNull Entity entity,
+            final @NotNull Consumer<Task> consumer,
+            final @NotNull TickSchedule tickSchedule
     );
 
+    /**
+     * Schedules a task in the execution context of a Bukkit location.
+     */
     @NotNull Task scheduleLocation(
-            @NotNull Location location,
-            @NotNull Runnable runnable,
-            @NotNull TickSchedule tickSchedule
+            final @NotNull Location location,
+            final @NotNull Runnable runnable,
+            final @NotNull TickSchedule tickSchedule
     );
 
+    /**
+     * Schedules a location task and provides its handle to the callback.
+     */
     @NotNull Task scheduleLocation(
-            @NotNull Location location,
-            @NotNull Consumer<Task> consumer,
-            @NotNull TickSchedule tickSchedule
+            final @NotNull Location location,
+            final @NotNull Consumer<Task> consumer,
+            final @NotNull TickSchedule tickSchedule
     );
 
 }
