@@ -3,7 +3,7 @@ package com.g4vrk.schedula.bukkit.impl.task.runner;
 import com.g4vrk.schedula.bukkit.impl.task.PaperTask;
 import com.g4vrk.schedula.task.Task;
 import com.g4vrk.schedula.task.TickSchedule;
-import com.g4vrk.schedula.task.scheduler.AbstractScheduler;
+import com.g4vrk.schedula.task.scheduler.RegionTaskScheduler;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.plugin.Plugin;
@@ -12,13 +12,24 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class PaperScheduler extends AbstractScheduler {
+public class PaperScheduler implements RegionTaskScheduler<Entity, Location> {
 
+    private final Plugin plugin;
     private final BukkitScheduler scheduler;
 
-    public PaperScheduler(@NotNull Plugin plugin) {
-        super(plugin);
+    public PaperScheduler(
+            final @NotNull Plugin plugin
+    ) {
+
+        this.plugin = plugin;
         this.scheduler = plugin.getServer().getScheduler();
+
+    }
+
+    protected @NotNull Plugin getPlugin() {
+
+        return plugin;
+
     }
 
     private @NotNull Task schedule(

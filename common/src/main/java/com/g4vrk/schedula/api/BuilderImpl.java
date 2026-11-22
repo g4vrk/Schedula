@@ -3,24 +3,32 @@ package com.g4vrk.schedula.api;
 import com.g4vrk.schedula.task.scheduler.factory.SchedulerFactory;
 import org.jetbrains.annotations.NotNull;
 
-class BuilderImpl implements SchedulaAPI.Builder {
+class BuilderImpl<E> implements SchedulaAPI.Builder<E> {
 
-    private SchedulerFactory schedulerFactory;
+    private SchedulerFactory<E> schedulerFactory;
 
     BuilderImpl() {
+
     }
 
     @Override
-    public SchedulaAPI.@NotNull Builder factory(@NotNull SchedulerFactory factory) {
+    public SchedulaAPI.@NotNull Builder<E> factory(
+            final @NotNull SchedulerFactory<E> factory
+    ) {
+
         this.schedulerFactory = factory;
-
         return this;
+
     }
 
     @Override
-    public @NotNull SchedulaAPI build() {
-        if (schedulerFactory == null) throw new NullPointerException("factory not initialized!");
+    public @NotNull SchedulaAPI<E> build() {
 
-        return () -> schedulerFactory.create();
+        if (schedulerFactory == null) {
+            throw new NullPointerException("factory not initialized!");
+        }
+        return schedulerFactory::create;
+
     }
+
 }

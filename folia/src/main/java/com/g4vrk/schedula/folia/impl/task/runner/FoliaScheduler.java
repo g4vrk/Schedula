@@ -4,7 +4,7 @@ import com.g4vrk.schedula.folia.impl.task.FoliaTask;
 import com.g4vrk.schedula.task.DummyTask;
 import com.g4vrk.schedula.task.Task;
 import com.g4vrk.schedula.task.TickSchedule;
-import com.g4vrk.schedula.task.scheduler.AbstractScheduler;
+import com.g4vrk.schedula.task.scheduler.RegionTaskScheduler;
 import io.papermc.paper.threadedregions.scheduler.AsyncScheduler;
 import io.papermc.paper.threadedregions.scheduler.GlobalRegionScheduler;
 import io.papermc.paper.threadedregions.scheduler.RegionScheduler;
@@ -17,7 +17,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-public final class FoliaScheduler extends AbstractScheduler {
+public final class FoliaScheduler implements RegionTaskScheduler<Entity, Location> {
+
+    private final Plugin plugin;
 
     private final GlobalRegionScheduler globalRegionScheduler;
 
@@ -26,13 +28,20 @@ public final class FoliaScheduler extends AbstractScheduler {
     private final AsyncScheduler asyncScheduler;
 
     public FoliaScheduler(
-            @NotNull Plugin plugin
+            final @NotNull Plugin plugin
     ) {
-        super(plugin);
 
-        this.regionScheduler = super.getServer().getRegionScheduler();
-        this.globalRegionScheduler = super.getServer().getGlobalRegionScheduler();
-        this.asyncScheduler = super.getServer().getAsyncScheduler();
+        this.plugin = plugin;
+        this.regionScheduler = plugin.getServer().getRegionScheduler();
+        this.globalRegionScheduler = plugin.getServer().getGlobalRegionScheduler();
+        this.asyncScheduler = plugin.getServer().getAsyncScheduler();
+
+    }
+
+    private @NotNull Plugin getPlugin() {
+
+        return plugin;
+
     }
 
     @Override

@@ -1,22 +1,31 @@
 package com.g4vrk.schedula.api;
 
-import com.g4vrk.schedula.task.scheduler.Scheduler;
+import com.g4vrk.schedula.task.scheduler.TaskScheduler;
 import com.g4vrk.schedula.task.scheduler.factory.SchedulerFactory;
 import org.jetbrains.annotations.NotNull;
 
-public interface SchedulaAPI {
+/**
+ * Platform-independent entry point for creating {@link TaskScheduler} instances.
+ *
+ * @param <E> the entity type accepted by created schedulers
+ */
+public interface SchedulaAPI<E> {
 
-    @NotNull Scheduler createScheduler();
+    @NotNull TaskScheduler<E> createScheduler();
 
-    static @NotNull Builder builder() {
-        return new BuilderImpl();
+    static <E> @NotNull Builder<E> builder() {
+
+        return new BuilderImpl<>();
+
     }
 
-    interface Builder {
+    interface Builder<E> {
 
-        @NotNull Builder factory(@NotNull SchedulerFactory factory);
+        @NotNull Builder<E> factory(
+                final @NotNull SchedulerFactory<E> factory
+        );
 
-        @NotNull SchedulaAPI build();
+        @NotNull SchedulaAPI<E> build();
 
     }
 
