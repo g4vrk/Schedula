@@ -4,7 +4,9 @@ include(
     "common",
     "bukkit",
     "folia",
-    "multi"
+    "multi",
+    "minestom",
+    "sponge"
 )
 
 dependencyResolutionManagement {
