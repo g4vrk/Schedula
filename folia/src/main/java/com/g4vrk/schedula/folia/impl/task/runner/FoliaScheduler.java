@@ -254,7 +254,7 @@ public final class FoliaScheduler extends AbstractScheduler {
             return DummyTask.get();
         }
 
-        return adapt(task, false);
+        return adapt(task, true);
     }
 
     @Override
@@ -270,7 +270,7 @@ public final class FoliaScheduler extends AbstractScheduler {
             task = entity.getScheduler().runAtFixedRate(
                     getPlugin(),
                     scheduledTask -> consumer.accept(
-                            adapt(scheduledTask, false)
+                            adapt(scheduledTask, true)
                     ),
                     null,
                     positiveTicks(tickSchedule.getDelay()),
@@ -282,7 +282,7 @@ public final class FoliaScheduler extends AbstractScheduler {
             task = entity.getScheduler().runDelayed(
                     getPlugin(),
                     scheduledTask -> consumer.accept(
-                            adapt(scheduledTask, false)
+                            adapt(scheduledTask, true)
                     ),
                     null,
                     positiveTicks(tickSchedule.getDelay())
@@ -293,7 +293,7 @@ public final class FoliaScheduler extends AbstractScheduler {
             task = entity.getScheduler().run(
                     getPlugin(),
                     scheduledTask -> consumer.accept(
-                            adapt(scheduledTask, false)
+                            adapt(scheduledTask, true)
                     ),
                     null
             );
@@ -303,7 +303,7 @@ public final class FoliaScheduler extends AbstractScheduler {
             return DummyTask.get();
         }
 
-        return adapt(task, false);
+        return adapt(task, true);
     }
 
     @Override
@@ -343,7 +343,7 @@ public final class FoliaScheduler extends AbstractScheduler {
             );
         }
 
-        return adapt(task, false);
+        return adapt(task, true);
     }
 
     @Override
@@ -360,7 +360,7 @@ public final class FoliaScheduler extends AbstractScheduler {
                     getPlugin(),
                     location,
                     scheduledTask -> consumer.accept(
-                            adapt(scheduledTask, false)
+                            adapt(scheduledTask, true)
                     ),
                     positiveTicks(tickSchedule.getDelay()),
                     positiveTicks(tickSchedule.getPeriod())
@@ -372,7 +372,7 @@ public final class FoliaScheduler extends AbstractScheduler {
                     getPlugin(),
                     location,
                     scheduledTask -> consumer.accept(
-                            adapt(scheduledTask, false)
+                            adapt(scheduledTask, true)
                     ),
                     positiveTicks(tickSchedule.getDelay())
             );
@@ -383,12 +383,12 @@ public final class FoliaScheduler extends AbstractScheduler {
                     getPlugin(),
                     location,
                     scheduledTask -> consumer.accept(
-                            adapt(scheduledTask, false)
+                            adapt(scheduledTask, true)
                     )
             );
         }
 
-        return adapt(task, false);
+        return adapt(task, true);
     }
 
     private @NotNull FoliaTask adapt(
