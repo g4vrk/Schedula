@@ -1,3 +1,15 @@
+pluginManagement {
+
+    repositories {
+
+        maven("https://maven.fabricmc.net/")
+        gradlePluginPortal()
+        mavenCentral()
+
+    }
+
+}
+
 rootProject.name = "schedula"
 
 include(
@@ -6,7 +18,8 @@ include(
     "folia",
     "multi",
     "minestom",
-    "sponge"
+    "sponge",
+    "fabric"
 )
 
 dependencyResolutionManagement {

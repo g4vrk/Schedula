@@ -4,6 +4,9 @@ paper-api = "1.18.2-R0.1-SNAPSHOT"
 folia-api = "1.21.11-R0.1-SNAPSHOT"
 minestom = "2026.10.07-26.2"
 sponge-api = "12.0.0"
+fabric-loom = "1.16.2"
+fabric-api = "0.161.0+26.2"
+fabric-minecraft = "26.2"
 
 minecraft = "1.18.2"
 
@@ -21,6 +24,7 @@ paper-api = { module = "io.papermc.paper:paper-api", version.ref = "paper-api" }
 folia-api = { module = "io.papermc.paper:paper-api", version.ref = "folia-api" }
 minestom = { module = "net.minestom:minestom", version.ref = "minestom" }
 sponge-api = { module = "org.spongepowered:spongeapi", version.ref = "sponge-api" }
+fabric-api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api" }
 
 lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
 
@@ -31,3 +35,4 @@ junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher
 [plugins]
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 run-paper = { id = "xyz.jpenilla.run-paper", version.ref = "run-task" }
+fabric-loom = { id = "net.fabricmc.fabric-loom", version.ref = "fabric-loom" }
