@@ -1,6 +1,6 @@
 [versions]
 
-paper-api = "1.18.2-R0.1-SNAPSHOT"
+paper-api = "1.16.5-R0.1-SNAPSHOT"
 folia-api = "1.21.11-R0.1-SNAPSHOT"
 minestom = "2026.10.07-26.2"
 sponge-api = "12.0.0"
@@ -20,7 +20,7 @@ junit-platform = "6.1.3"
 
 [libraries]
 jetbrains-annotations = { module = "org.jetbrains:annotations", version = "24.1.0" }
-paper-api = { module = "io.papermc.paper:paper-api", version.ref = "paper-api" }
+paper-api = { module = "com.destroystokyo.paper:paper-api", version.ref = "paper-api" }
 folia-api = { module = "io.papermc.paper:paper-api", version.ref = "folia-api" }
 minestom = { module = "net.minestom:minestom", version.ref = "minestom" }
 sponge-api = { module = "org.spongepowered:spongeapi", version.ref = "sponge-api" }
