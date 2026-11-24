@@ -1,6 +1,6 @@
 # Schedula
 
-**Compact scheduling framework for Paper and Folia.**
+**Compact scheduling framework for Bukkit/Paper, Folia, Fabric, Sponge and Minestom.**
 
 [![Build](https://github.com/g4vrk/Schedula/actions/workflows/build.yml/badge.svg)](https://github.com/g4vrk/Schedula/actions/workflows/build.yml)
 [![Java](https://img.shields.io/badge/Java-21+-orange)](.)
@@ -31,12 +31,15 @@ Schedula предоставляет единый API для планирован
 
 ## Модули
 
-| Модуль   | Назначение                       |
-| -------- | -------------------------------- |
-| `common` | Основной API                     |
-| `bukkit` | Paper/Bukkit implementation      |
-| `folia`  | Folia implementation             |
-| `multi`  | Paper/Folia API с auto-detection |
+| Модуль                  | Назначение                       |
+| ----------------------- | -------------------------------- |
+| `common`                | Основной API                     |
+| `platform/bukkit`       | Paper/Bukkit implementation      |
+| `platform/folia`        | Folia implementation             |
+| `platform/fabric`       | Fabric implementation            |
+| `platform/sponge`       | Sponge implementation            |
+| `platform/minestom`     | Minestom implementation          |
+| `multi`                 | Paper/Folia API с auto-detection |
 
 Для multiplatform-плагинов используйте `multi`.
 
@@ -247,8 +250,7 @@ MultiplatformSchedulaAPI api = MultiplatformSchedulaAPI.builder()
 
 ```text
 common/build/libs
-bukkit/build/libs
-folia/build/libs
+platform/<платформа>/build/libs
 multi/build/libs
 ```
 

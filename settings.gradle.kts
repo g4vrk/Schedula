@@ -14,12 +14,12 @@ rootProject.name = "schedula"
 
 include(
     "common",
-    "bukkit",
-    "folia",
     "multi",
-    "minestom",
-    "sponge",
-    "fabric"
+    "platform:bukkit",
+    "platform:folia",
+    "platform:minestom",
+    "platform:sponge",
+    "platform:fabric"
 )
 
 dependencyResolutionManagement {

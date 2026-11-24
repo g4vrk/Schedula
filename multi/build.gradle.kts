@@ -1,8 +1,8 @@
 dependencies {
 
     implementation(project(":common"))
-    implementation(project(":folia"))
-    implementation(project(":bukkit"))
+    implementation(project(":platform:folia"))
+    implementation(project(":platform:bukkit"))
 
     compileOnly(libs.folia.api)
 
