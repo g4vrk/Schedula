@@ -95,7 +95,7 @@ public class PaperScheduler implements RegionTaskScheduler<Entity, Location> {
             @NotNull TickSchedule tickSchedule,
             boolean async
     ) {
-        final ConsumerTask task = new ConsumerTask(async);
+        final ConsumerTask task = new ConsumerTask(!async);
 
         final Runnable runnable = () -> consumer.accept(task);
 

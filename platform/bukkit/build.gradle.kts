@@ -3,6 +3,7 @@ dependencies {
     implementation(project(":common"))
 
     compileOnly(libs.paper.api)
+    testImplementation(libs.paper.api)
 
 }
 
